@@ -1,0 +1,20 @@
+# OS/IDE
+.DS_Store
+.vscode/
+
+# Docker
+**/postgres_data/
+
+# Python (Backend)
+**/__pycache__/
+*.py[cod]
+.env
+
+# Node/Next.js (Frontend)
+**/node_modules/
+**/.next/
+**/out/
+.env.local
+
+# その他
+*.log

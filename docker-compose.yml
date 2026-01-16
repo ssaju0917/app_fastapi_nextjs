@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: intro-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: intro_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: intro-backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://user:password@db:5432/intro_db
+      PYTHONPATH: /app
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: intro-frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # node_modulesはホスト側で上書きされないよう保護
+    ports:
+      - "3000:3000"
+    environment:
+      # ブラウザからAPIを叩くためのURL
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
