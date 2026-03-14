@@ -5,6 +5,10 @@ import os
 
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@db:5432/intro_db")
 
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    # SQLAlchemy互換のために postgres:// を postgresql:// に置換
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
