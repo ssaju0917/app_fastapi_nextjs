@@ -3,6 +3,7 @@ import Link from "next/link";
 const MENU_ITEMS = [
   { name: "🏠 ホーム", href: "/" },
   { name: "👥 ユーザー管理", href: "/users" },
+  { name: "📔 日記管理", href: "/diaries" },
 ];
 
 export default function Sidebar() {

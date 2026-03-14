@@ -8,6 +8,6 @@ export const fetcher = async (path: string, options?: RequestInit) => {
       ...options?.headers,
     },
   });
-  if (!res.ok) throw new Error("API Error");
+  if (!res.ok) throw new Error(`API Error: ${res.status} ${res.statusText}`);
   return res.json();
 };

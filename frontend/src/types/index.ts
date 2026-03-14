@@ -10,3 +10,15 @@ export type User = {
   name: string;
   features: Feature[];
 };
+
+export type Diary = {
+  id: number;
+  title: string;
+  content: string;
+  diary_date: string;
+};
+
+export type DiaryCreate = {
+  title: string;
+  content: string;
+};
